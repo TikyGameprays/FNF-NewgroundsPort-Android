@@ -24,7 +24,8 @@ class MusicBeatState extends FlxUIState
 	#if android
 	var _virtualpad:FlxVirtualPad;
 	var androidc:AndroidControls;
-	var trackedinputs:Array<FlxActionInput> = [];
+	var trackedinputsUI:Array<FlxActionInput> = [];
+	var trackedinputsNOTES:Array<FlxActionInput> = [];
 	#end
 	
 	#if android
@@ -32,9 +33,9 @@ class MusicBeatState extends FlxUIState
 		_virtualpad = new FlxVirtualPad(DPad, Action);
 		_virtualpad.alpha = 0.75;
 		add(_virtualpad);
-		controls.setVirtualPad(_virtualpad, DPad, Action);
-		trackedinputs = controls.trackedinputs;
-		controls.trackedinputs = [];
+		controls.setVirtualPadUI(_virtualpad, DPad, Action);
+		trackedinputsUI = controls.trackedinputsUI;
+		controls.trackedinputsUI = [];
 	}
 	#end
 
@@ -45,16 +46,16 @@ class MusicBeatState extends FlxUIState
 		switch (androidc.mode)
 		{
 			case VIRTUALPAD_RIGHT | VIRTUALPAD_LEFT | VIRTUALPAD_CUSTOM:
-				controls.setVirtualPad(androidc.vpad, FULL, NONE);
+				controls.setVirtualPadNOTES(androidc.vpad, FULL, NONE);
 			case DUO:
-				controls.setVirtualPad(androidc.vpad, DUO, NONE);
+				controls.setVirtualPadNOTES(androidc.vpad, DUO, NONE);
 			case HITBOX:
 				controls.setHitBox(androidc.hbox);
 			default:
 		}
 
-		trackedinputs = controls.trackedinputs;
-		controls.trackedinputs = [];
+		trackedinputsNOTES = controls.trackedinputsNOTES;
+		controls.trackedinputsNOTES = [];
 
 		var camcontrol = new flixel.FlxCamera();
 		FlxG.cameras.add(camcontrol);
@@ -78,7 +79,8 @@ class MusicBeatState extends FlxUIState
 	
 	override function destroy() {
 		#if android
-		controls.removeFlxInput(trackedinputs);
+		controls.removeFlxInput(trackedinputsUI);
+		controls.removeFlxInput(trackedinputsNOTES);	
 		#end	
 		
 		super.destroy();
