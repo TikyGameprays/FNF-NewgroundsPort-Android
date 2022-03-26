@@ -107,11 +107,7 @@ class Paths
 
 	inline static public function video(key:String, ?library:String)
 	{
-                #if web
-		return getPath('music/$key.mp4', TEXT, library);
-                #elseif android
-                return getPath('music/$key.html', TEXT, library);
-                #end
+		return 'assets/music/$key.' + #if android 'html' #else 'mp4' #end;
 	}
 
 	inline static public function getSparrowAtlas(key:String, ?library:String)
