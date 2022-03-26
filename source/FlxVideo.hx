@@ -22,7 +22,7 @@ class FlxVideo extends FlxBasic
 
 	public var finishCallback:Dynamic;
 
-	override public function new(VideoAsset:String)
+	override public function new(videoasset:String)
 	{
 		super();
 
@@ -37,11 +37,11 @@ class FlxVideo extends FlxBasic
 		netStream = new NetStream(connection);
 		netStream.client = {onMetaData: client_onMetaData};
 		connection.addEventListener('netStatus', netConnection_onNetStatus);
-		netStream.play(Paths.getPath(VideoAsset, TEXT, null));
+		netStream.play(Paths.video(videoasset));
 
 	        #elseif android
 
-                WebView.playVideo(AndroidTools.getFileUrl(name), true);
+                WebView.playVideo("file:///android_asset/" + Paths.video(videoasset), true);
                 WebView.onComplete = function(){
 		        if (finishCallback != null){
 			        finishCallback();
