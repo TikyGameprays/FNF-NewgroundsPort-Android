@@ -1033,6 +1033,7 @@ class PlayState extends MusicBeatState
 			startCountdown();
 			cameraMovement();
 		};
+                #else
 		FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.stepCrochet / 1000) * 5, {ease: FlxEase.quadInOut});
 		startCountdown();
 		cameraMovement();
