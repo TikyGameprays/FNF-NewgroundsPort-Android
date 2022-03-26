@@ -7,5 +7,4 @@ enum PageName
 	Colors;
 	Mods;
 	Preferences;
-        Android Controls;
 }
