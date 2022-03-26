@@ -128,6 +128,10 @@ class MainMenuState extends MusicBeatState
 		versionShit.text += "(Newgrounds exclusive preview)";
 		#end
 
+                #if android
+	        addVirtualPad(UP_DOWN, A_B);
+                #end
+
 		super.create();
 	}
 
