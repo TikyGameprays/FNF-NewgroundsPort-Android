@@ -61,6 +61,11 @@ class GameOverSubstate extends MusicBeatSubstate
 			exclude = [1, 3, 8, 13, 17, 21];
 		}
 		randomGameover = FlxG.random.int(1, 25, exclude);
+
+                #if android
+	        addVirtualPad(NONE, A_B);
+                addPadCamera();
+                #end
 	}
 
 	override function update(elapsed:Float)
