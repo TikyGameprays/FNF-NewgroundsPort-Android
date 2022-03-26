@@ -982,7 +982,7 @@ class PlayState extends MusicBeatState
 		var black:FlxSprite = new FlxSprite(-200, -200).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		black.scrollFactor.set();
 		add(black);
-		new FlxVideo('music/ughCutscene.html').finishCallback = function()
+		new FlxVideo('ughCutscene').finishCallback = function()
 		{
 			remove(black);
 			FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.stepCrochet / 1000) * 5, {ease: FlxEase.quadInOut});
