@@ -949,14 +949,12 @@ class PlayState extends MusicBeatState
 					schoolIntro(doof);
 				case 'thorns':
 					schoolIntro(doof);
-				#if web
 				case 'ugh':
 					ughIntro();
 				case 'guns':
 					gunsIntro();
 				case 'stress':
 					stressIntro();
-				#end
 				default:
 					startCountdown();
 			}
@@ -975,11 +973,12 @@ class PlayState extends MusicBeatState
 
 	function ughIntro():Void
 	{
+                #if (web || android)
 		inCutscene = true;
 		var black:FlxSprite = new FlxSprite(-200, -200).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		black.scrollFactor.set();
 		add(black);
-		new FlxVideo('music/ughCutscene.mp4').finishCallback = function()
+		new FlxVideo('music/ughCutscene.html').finishCallback = function()
 		{
 			remove(black);
 			FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.stepCrochet / 1000) * 5, {ease: FlxEase.quadInOut});
@@ -989,36 +988,55 @@ class PlayState extends MusicBeatState
 		FlxG.camera.zoom = defaultCamZoom * 1.2;
 		camFollow.x += 100;
 		camFollow.y += 100;
+                #else
+		FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.stepCrochet / 1000) * 5, {ease: FlxEase.quadInOut});
+		startCountdown();
+		cameraMovement();
+		FlxG.camera.zoom = defaultCamZoom * 1.2;
+		camFollow.x += 100;
+		camFollow.y += 100;
+                #end
 	}
 
 	function gunsIntro():Void
 	{
+                #if (web || android)
 		inCutscene = true;
 		var black:FlxSprite = new FlxSprite(-200, -200).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		black.scrollFactor.set();
 		add(black);
-		new FlxVideo('music/gunsCutscene.mp4').finishCallback = function()
+		new FlxVideo('gunsCutscene').finishCallback = function()
 		{
 			remove(black);
 			FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.stepCrochet / 1000) * 5, {ease: FlxEase.quadInOut});
 			startCountdown();
 			cameraMovement();
 		};
+                #else
+		FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.stepCrochet / 1000) * 5, {ease: FlxEase.quadInOut});
+		startCountdown();
+		cameraMovement();
+                #end
 	}
 
 	function stressIntro():Void
 	{
+                #if (web || android)
 		inCutscene = true;
 		var black:FlxSprite = new FlxSprite(-200, -200).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		black.scrollFactor.set();
 		add(black);
-		new FlxVideo('music/stressCutscene.mp4').finishCallback = function()
+		new FlxVideo('stressCutscene').finishCallback = function()
 		{
 			remove(black);
 			FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.stepCrochet / 1000) * 5, {ease: FlxEase.quadInOut});
 			startCountdown();
 			cameraMovement();
 		};
+		FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.stepCrochet / 1000) * 5, {ease: FlxEase.quadInOut});
+		startCountdown();
+		cameraMovement();
+                #end
 	}
 
 	function initDiscord()
