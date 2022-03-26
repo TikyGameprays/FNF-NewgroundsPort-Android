@@ -1,17 +1,24 @@
 package;
 
+#if web
 import openfl.net.NetStream;
 import openfl.net.NetConnection;
-import flixel.FlxG;
 import openfl.media.Video;
+#elseif android
+import extension.webview.WebView;
+import android.AndroidTools;
+#end
+import flixel.FlxG;
 import flixel.FlxBasic;
 
 using StringTools;
 
 class FlxVideo extends FlxBasic
 {
+        #if web
 	var video:Video;
 	var netStream:NetStream;
+        #end
 
 	public var finishCallback:Dynamic;
 
@@ -19,6 +26,7 @@ class FlxVideo extends FlxBasic
 	{
 		super();
 
+                #if web
 		video = new Video();
 		video.x = 0;
 		video.y = 0;
@@ -30,8 +38,20 @@ class FlxVideo extends FlxBasic
 		netStream.client = {onMetaData: client_onMetaData};
 		connection.addEventListener('netStatus', netConnection_onNetStatus);
 		netStream.play(Paths.getPath(VideoAsset, TEXT, null));
+
+	        #elseif android
+
+                WebView.playVideo(AndroidTools.getFileUrl(name), true);
+                WebView.onComplete = function(){
+		        if (finishCallback != null){
+			        finishCallback();
+		        }
+                }
+
+                #end
 	}
 
+        #if web
 	public function finishVideo()
 	{
 		netStream.dispose();
@@ -59,4 +79,5 @@ class FlxVideo extends FlxBasic
 			finishVideo();
 		}
 	}
+        #end
 }
