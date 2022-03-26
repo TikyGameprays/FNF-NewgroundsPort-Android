@@ -63,10 +63,6 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-		#if polymod
-		polymod.Polymod.init({modRoot: "mods", dirs: ['introMod'], framework: OPENFL});
-		#end
-
 		FlxG.game.focusLostFramerate = 60;
 
 		swagShader = new ColorSwap();
@@ -344,14 +340,6 @@ class TitleState extends MusicBeatState
 			{
 				FlxG.sound.music.onComplete = null;
 			}
-
-			#if !switch
-			// If it's Friday according to da clock
-			if (Date.now().getDay() == 5)
-			{
-				// Unlock Friday medal
-			}
-			#end
 
 			titleText.animation.play('press');
 
