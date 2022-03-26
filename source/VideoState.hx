@@ -18,7 +18,7 @@ class VideoState extends MusicBeatState
 		}
 
                 #if (web || android)
-		new FlxVideo('stressCutscene').finishCallback = function()
+		new FlxVideo('kickstarterTrailer').finishCallback = function()
 		{
 			finishVid();
 		};
