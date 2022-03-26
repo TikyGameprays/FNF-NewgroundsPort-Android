@@ -19,6 +19,10 @@ class OptionsMenu extends Page
 		{
 			onSwitch.dispatch(PageName.Controls);
 		});
+		createItem('android controls', function()
+		{
+			FlxG.switchState(new android.AndroidControlsMenu());
+		});
 		if (showDonate)
 		{
 			createItem('donate', selectDonate, true);
