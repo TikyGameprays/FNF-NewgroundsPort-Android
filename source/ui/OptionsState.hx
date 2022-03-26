@@ -25,7 +25,6 @@ class OptionsState extends MusicBeatState
 		var optionsmenu = addPage(Options, new OptionsMenu(false));
 		var preferencesmenu = addPage(Preferences, new PreferencesMenu());
 		var controlsmenu = addPage(Controls, new ControlsMenu());
-		var androidcontrolsmenu = addPage(Android Controls, new android.AndroidControlsMenu());
 		if (optionsmenu.hasMultipleOptions())
 		{
 			optionsmenu.onExit.add(exitToMainMenu);
