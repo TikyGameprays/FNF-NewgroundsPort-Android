@@ -6,7 +6,6 @@ import openfl.net.NetConnection;
 import openfl.media.Video;
 #elseif android
 import extension.webview.WebView;
-import android.AndroidTools;
 #end
 import flixel.FlxG;
 import flixel.FlxBasic;
